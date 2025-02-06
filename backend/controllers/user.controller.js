@@ -35,7 +35,6 @@ export const getAll = async(req, res) =>{
 
 export const getOne = async(req, res) =>{
     try {
-
         const id = req.params.id;
         const userExist = await User.findById(id);
         if(!userExist){
@@ -50,17 +49,17 @@ export const getOne = async(req, res) =>{
 
 
 export const update = async(req, res) =>{
-    const { id } = req.params;
+    const { _id } = req.params;
     const {  name, mobile, email, role, status } = req.body;
     
     try {
          await User.findOneAndUpdate(
-            { id: id }, 
+            { id: _id }, 
             { $set: { name, mobile, email, role, status } },  
             { new: true } 
           );
 
-        res.status(200).json({msg: "User updated successfully"});
+        res.status(200).json({msg: "task updated successfully"});
         
     } catch (error) {
         res.status(500).json({error: error});
@@ -79,3 +78,4 @@ export const deleteUser = async(req, res) =>{
         res.status(500).json({error: error});
     }
 }
+
